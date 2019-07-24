@@ -4,21 +4,6 @@ Bundler.require
 require_relative 'lib/game'
 require_relative 'lib/player'
 
-player1 = Player.new("Josiane")
-player2 = Player.new ("José")
-
-	while player1.life_points > 0 and player2.life_points > 0
-		puts "Voici l'état de chaque joueur : "
-		puts player1.life_points
-		puts player2.life_points
-		puts "Passons à l'attaque :"
-		player1.attacks(player2)
-	if player2.life_points <= 0
-		break
-	end
-	player2.attacks(player1)
-end
-
 
 #binding.pry
 
@@ -29,10 +14,11 @@ end
     	|Bienvenue sur 'ILS VEULENT TOUS MA POO' !      |
     	|Le but du jeu est d'être le dernier survivant !|
     	-------------------------------------------------"
+
     print "Par quel nom souhaitez-vous que je vous appelle ?" #name
     	name = gets.chomp #
     	player1 = HumanPlayer.new # Initialisation du joueur: ensuite, le jeu va demander à l'utilisateur son prénom et créer un HumanPlayer portant ce prénom.
-    	array.ennemies = [ennemy1 = Player.new("Josiane"), ennemy2 = Player.new("José")] # Initialisation des ennemis : le jeu va maintenant créer nos deux combattants préférés, "Josiane" et "José".
+    	array_ennemies = [ennemy1 = Player.new("Josiane"), ennemy2 = Player.new("José")] # Initialisation des ennemis : le jeu va maintenant créer nos deux combattants préférés, "Josiane" et "José".
     																					  # Comme nous savons qu'à terme (version 3.0) il y aura plus de 2 ennemis, on va mettre en place une astuce pour manipuler facilement un groupe d'ennemis : le jeu va créer un array enemies qui va contenir les deux objets Player que sont José et Josiane. Tu verras plus tard l'usage qu'on va en faire.
     
 
@@ -47,7 +33,7 @@ end
     # laisse la boucle while vide pour le moment, on la codera juste après.
 
 
-     while user.life_points >0 && (player1.life_points > 0 || player2.life_points >0)
+     while player1.life_points >0 && (ennemy1.life_points > 0 || ennemy2.life_points >0)
 
 #  Voici ce que tu vas mettre dans la boucle while :
 
@@ -85,8 +71,9 @@ end
 # 	  pour afficher l'état réel de chaque Player que l'utilisateur combat.
 	
 		puts "attaquer un joueur en vue :"
-		puts "#{index} : #{ennemy.show_state}" #pas de 0 ou 1 comme choix d'entrée ---> grâce à l'index
-		puts "--->"
+		  array_ennemies.each_with_index do |enemy,index|
+			puts "Joueur #{index} : #{ennemy.show_state} points de vie" #pas de 0 ou 1 comme choix d'entrée ---> grâce à l'index
+			puts "--->"
 	end
 
 #     Une fois cela fait, on laisse l'utilisateur effectuer une saisie. Et en fonction de la saisie, on va :
@@ -103,6 +90,7 @@ end
 			when "1" then player2.attacks(ennemy1) if ennemy2.life_points > 0
 			else
 				puts "Demandez moi autre chose."
+		end
 
 
 #     C'est maintenant au tour des ennemis de riposter ! 
@@ -122,7 +110,7 @@ end
 #     10 ou 20 ou 30 Player : on va pas se taper 10 ou 20 ou 30 lignes 
 #     de playerX.attacks(user) !
 
-    	array_enemies.select{|enemy| enemy.life_points > 0}.each do |enemy| enemy.attacks(player1) end
+    	array_ennemies.select{|enemy| enemy.life_points > 0}.each do |enemy| enemy.attacks(player1) end
 
 
 #     Ha oui, un petit dernier truc : 
