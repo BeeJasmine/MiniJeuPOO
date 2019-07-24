@@ -79,10 +79,10 @@ attr_accessor :weapon_level
 		if dice = 1 #when 1 ????
 			puts "Tu n'as rien trouvé..."
 		if dice = 6 #when 6 ????
-			added_life(80)
+			do added_life(80)
 			puts "Waow, tu as trouvé un pack de +80 points de vie !" 
 		elsif #else??? 
-			added_life(50)
+			do added_life(50)
 			puts "Bravo, tu as trouvé un pack de +50 points de vie !"
 		end
 	end
